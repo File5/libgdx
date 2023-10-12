@@ -128,11 +128,11 @@ public class AndroidGL31 extends AndroidGL30 implements GL31 {
 	@Override
 	public String glGetProgramResourceName(int program, int programInterface, int index) {
 		return GLES31.glGetProgramResourceName(program, programInterface, index);
-	}	
-	
+	}
+
 	@Override
-	public void glGetProgramResourceiv (int program, int programInterface, int index, int propCount, IntBuffer props, int bufSize, IntBuffer length, IntBuffer params) {
-		GLES31.glGetProgramResourceiv(program, programInterface, index, propCount, props, bufSize, length, params);
+	public void glGetProgramResourceiv(int program, int programInterface, int index, IntBuffer props, IntBuffer length, IntBuffer params) {
+		GLES31.glGetProgramResourceiv(program, programInterface, index, props.remaining(), props, params.remaining(), length, params);
 	}
 
 	@Override
@@ -176,6 +176,24 @@ public class AndroidGL31 extends AndroidGL30 implements GL31 {
 	}
 
 	@Override
+	public void glProgramUniform1iv(int program, int location, IntBuffer value) {
+		int count = value.remaining();
+		GLES31.glProgramUniform1iv(program, location, count, value);
+	}
+
+	@Override
+	public void glProgramUniform1uiv(int program, int location, IntBuffer value) {
+		int count = value.remaining();
+		GLES31.glProgramUniform1uiv(program, location, count, value);
+	}
+
+	@Override
+	public void glProgramUniform1fv(int program, int location, FloatBuffer value) {
+		int count = value.remaining();
+		GLES31.glProgramUniform1fv(program, location, count, value);
+	}
+
+	@Override
 	public void glProgramUniform2f (int program, int location, float v0, float v1) {
 		GLES31.glProgramUniform2f(program, location, v0, v1); 
 	}
@@ -188,6 +206,24 @@ public class AndroidGL31 extends AndroidGL30 implements GL31 {
 	@Override
 	public void glProgramUniform2ui (int program, int location, int v0, int v1) {
 		GLES31.glProgramUniform2ui(program, location, v0, v1);
+	}
+
+	@Override
+	public void glProgramUniform2iv(int program, int location, IntBuffer value) {
+		int count = value.remaining() >> 1;
+		GLES31.glProgramUniform2iv(program, location, count, value);
+	}
+
+	@Override
+	public void glProgramUniform2uiv(int program, int location, IntBuffer value) {
+		int count = value.remaining() >> 1;
+		GLES31.glProgramUniform2uiv(program, location, count, value);
+	}
+
+	@Override
+	public void glProgramUniform2fv(int program, int location, FloatBuffer value) {
+		int count = value.remaining() >> 1;
+		GLES31.glProgramUniform2fv(program, location, count, value);
 	}
 
 	@Override
@@ -206,6 +242,24 @@ public class AndroidGL31 extends AndroidGL30 implements GL31 {
 	}
 
 	@Override
+	public void glProgramUniform3iv(int program, int location, IntBuffer value) {
+		int count = value.remaining() / 3;
+		GLES31.glProgramUniform3iv(program, location, count, value);
+	}
+
+	@Override
+	public void glProgramUniform3uiv(int program, int location, IntBuffer value) {
+		int count = value.remaining() / 3;
+		GLES31.glProgramUniform3uiv(program, location, count, value);
+	}
+
+	@Override
+	public void glProgramUniform3fv(int program, int location, FloatBuffer value) {
+		int count = value.remaining() / 3;
+		GLES31.glProgramUniform3fv(program, location, count, value);
+	}
+
+	@Override
 	public void glProgramUniform4f (int program, int location, float v0, float v1, float v2, float v3) {
 		GLES31.glProgramUniform4f(program, location, v0, v1, v2, v3); 
 	}
@@ -221,52 +275,74 @@ public class AndroidGL31 extends AndroidGL30 implements GL31 {
 	}
 
 	@Override
-	public void glProgramUniform4uiv (int program, int location, int count, IntBuffer value) {
+	public void glProgramUniform4uiv (int program, int location, IntBuffer value) {
+		int count = value.remaining() >> 2;
 		GLES31.glProgramUniform4uiv(program, location, count, value);
 	}
 
 	@Override
-	public void glProgramUniformMatrix2fv (int program, int location, int count, boolean transpose, FloatBuffer value) {
+	public void glProgramUniform4iv(int program, int location, IntBuffer value) {
+		int count = value.remaining() >> 2;
+		GLES31.glProgramUniform4iv(program, location, count, value);
+	}
+
+	@Override
+	public void glProgramUniform4fv(int program, int location, FloatBuffer value) {
+		int count = value.remaining() >> 2;
+		GLES31.glProgramUniform4fv(program, location, count, value);
+	}
+
+	@Override
+	public void glProgramUniformMatrix2fv (int program, int location, boolean transpose, FloatBuffer value) {
+		int count = value.remaining() >> 2;
 		GLES31.glProgramUniformMatrix2fv(program, location, count, transpose, value);
 	}
 
 	@Override
-	public void glProgramUniformMatrix2x3fv (int program, int location, int count, boolean transpose, FloatBuffer value) {
+	public void glProgramUniformMatrix2x3fv (int program, int location, boolean transpose, FloatBuffer value) {
+		int count = value.remaining() / 6;
 		GLES31.glProgramUniformMatrix2x3fv(program, location, count, transpose, value);
 	}
 
 	@Override
-	public void glProgramUniformMatrix2x4fv (int program, int location, int count, boolean transpose, FloatBuffer value) {
+	public void glProgramUniformMatrix2x4fv (int program, int location, boolean transpose, FloatBuffer value) {
+		int count = value.remaining() >> 3;
 		GLES31.glProgramUniformMatrix2x4fv(program, location, count, transpose, value);
 	}		
 
 	@Override
-	public void glProgramUniformMatrix3fv (int program, int location, int count, boolean transpose, FloatBuffer value) {
+	public void glProgramUniformMatrix3fv (int program, int location, boolean transpose, FloatBuffer value) {
+		int count = value.remaining() / 9;
 		GLES31.glProgramUniformMatrix3fv(program, location, count, transpose, value);
 	}
 
 	@Override
-	public void glProgramUniformMatrix3x2fv (int program, int location, int count, boolean transpose, FloatBuffer value) {
+	public void glProgramUniformMatrix3x2fv (int program, int location, boolean transpose, FloatBuffer value) {
+		int count = value.remaining() / 6;
 		GLES31.glProgramUniformMatrix3x2fv(program, location, count, transpose, value);
 	}
 
 	@Override
-	public void glProgramUniformMatrix3x4fv (int program, int location, int count, boolean transpose, FloatBuffer value) {
+	public void glProgramUniformMatrix3x4fv (int program, int location, boolean transpose, FloatBuffer value) {
+		int count = value.remaining() / 12;
 		GLES31.glProgramUniformMatrix3x4fv(program, location, count, transpose, value);
 	}
 
 	@Override
-	public void glProgramUniformMatrix4fv (int program, int location, int count, boolean transpose, FloatBuffer value) {
+	public void glProgramUniformMatrix4fv (int program, int location, boolean transpose, FloatBuffer value) {
+		int count = value.remaining() >> 4;
 		GLES31.glProgramUniformMatrix4fv(program, location, count, transpose, value);
 	}
 
 	@Override
-	public void glProgramUniformMatrix4x2fv (int program, int location, int count, boolean transpose, FloatBuffer value) {
+	public void glProgramUniformMatrix4x2fv (int program, int location, boolean transpose, FloatBuffer value) {
+		int count = value.remaining() >> 3;
 		GLES31.glProgramUniformMatrix4x2fv(program, location, count, transpose, value);
 	}
 
 	@Override
-	public void glProgramUniformMatrix4x3fv (int program, int location, int count, boolean transpose, FloatBuffer value) {
+	public void glProgramUniformMatrix4x3fv (int program, int location, boolean transpose, FloatBuffer value) {
+		int count = value.remaining() / 12;
 		GLES31.glProgramUniformMatrix4x3fv(program, location, count, transpose, value);
 	}	
 

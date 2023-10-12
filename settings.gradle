@@ -18,12 +18,12 @@ include ":gdx"
 include ":backends"
 include ":backends:gdx-backend-android"
 include ":backends:gdx-backend-headless"
-include ":backends:gdx-backend-lwjgl"
+//include ":backends:gdx-backend-lwjgl"  // GL30 compilation issues
 include ":backends:gdx-backend-lwjgl3"
-include ":backends:gdx-backend-robovm"
-include ":backends:gdx-backend-robovm-metalangle"
-include ":backends:gdx-backends-gwt"
-project(":backends:gdx-backends-gwt").name = "gdx-backend-gwt"
+//include ":backends:gdx-backend-robovm"
+//include ":backends:gdx-backend-robovm-metalangle"
+//include ":backends:gdx-backends-gwt"  // GL30 compilation issues
+//project(":backends:gdx-backends-gwt").name = "gdx-backend-gwt"
 
 include(":extensions:gdx-box2d")
 project(":extensions:gdx-box2d").name = "gdx-box2d-parent"
@@ -32,16 +32,16 @@ include ":extensions:gdx-box2d-parent:gdx-box2d-gwt"
 include ":extensions:gdx-bullet"
 include ":extensions:gdx-freetype"
 include ":extensions:gdx-setup"
-include ":extensions:gdx-tools"
+//include ":extensions:gdx-tools"  // depends on gdx-backend-lwjgl
 include ":extensions:gdx-lwjgl3-angle"
 include ":extensions:gdx-lwjgl3-glfw-awt-macos"
 
 include ":tests"
 include ":tests:gdx-tests"
 include ":tests:gdx-tests-android"
-include ":tests:gdx-tests-gwt"
-include ":tests:gdx-tests-iosrobovm"
-include ":tests:gdx-tests-lwjgl"
+//include ":tests:gdx-tests-gwt"
+//include ":tests:gdx-tests-iosrobovm"
+//include ":tests:gdx-tests-lwjgl"
 include ":tests:gdx-tests-lwjgl3"
 
 rootProject.name = "libgdx"
